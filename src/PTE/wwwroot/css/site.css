@@ -23,6 +23,12 @@ textarea {
     line-height: 1.4;
 }
 
+.verticle_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"]
 {

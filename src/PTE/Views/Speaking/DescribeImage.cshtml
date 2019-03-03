@@ -1,0 +1,62 @@
+﻿@model PTE.Models.Speaking.DescribeImage
+
+@{
+    ViewBag.Title = "Describe Image";
+    Layout = "_Layout_Exam";
+}
+
+@section scripts
+    {
+    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+    <script src="~/js/hark.js"></script>
+}
+
+<input type="hidden" id="typeId" name="typeId" value="describe_image">
+<input type="hidden" id="questionDuration" name="questionDuration" value=5>
+<div class="panel panel-default" id="describe_image">
+    <div class="panel-heading"><h3>Speaking - Describe Image</h3></div>
+
+    <div class="panel-body">
+       
+
+            <div class="row verticle_center">
+
+                <div class="col-xs-8">
+                    @{
+                        var imageSource = "/Questions/" + Model.ExamId + "/Speaking/desrcibe_image/" + Model.DescribeImageId + ".png";
+                        //var audioSource = "/" + Model.RepeatSentenceId + ".mp3";
+                    }
+                    <img src="@imageSource" class="img-responsive">
+                </div>
+                
+                <div class="col-xs-3 panel panel-default">
+                    <div class="panel-body">
+                        <p class="text-center"><strong>Recorded Answer</strong></p>
+
+                        <br>
+                        <p>Current Status : </p>
+                        <p id="countdown_answer"></p>
+
+
+                        <div class="progress">
+                            <div class="progress-bar" id="progressBarAnswer" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                <span class="sr-only">0% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            
+       
+       
+        <br />       
+
+        
+        <a id="describe_image_next" class="btn btn-info pull-right" role="button">Next</a>
+
+    </div>
+</div>
+
+

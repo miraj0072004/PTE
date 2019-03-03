@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PTE.Models.Exam>
+
+@{
+    ViewData["Title"] = "Exams";
+}
+
+
+<h2>Mock PTE Exams</h2>
+
+<ul>
+    @*<li>Exam One</li>
+    <li>Exam Two</li>*@
+    
+    @foreach (var exam in Model)
+    {
+        <li><a href="@Url.Action("ReadAloud","Speaking",new {examId=exam.Id,Id=1})" target="_blank">@exam.Title</a></li>
+    }
+</ul>
+
