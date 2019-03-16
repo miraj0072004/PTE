@@ -18,6 +18,8 @@ namespace PTE.Models
         public DbSet<DescribeImageAnswer> DescribeImageAnswers { get; set; }
         public DbSet<RetellLecture> RetellLectures { get; set; }
         public DbSet<RetellLectureAnswer> RetellLectureAnswers { get; set; }
+        public DbSet<AnswerShortQuestion> AnswerShortQuestions { get; set; }
+        public DbSet<AnswerShortQuestionAnswer> AnswerShortQuestionAnswers { get; set; }
 
         public ExamDataContext(DbContextOptions<ExamDataContext> options) : base(options)
         {

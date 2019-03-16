@@ -167,7 +167,7 @@ namespace PTE.Controllers
             }
             else
             {
-                return RedirectToAction("ReadAloud", "Speaking", new { examId, id = newId });
+                return RedirectToAction("RepeatSentence", "Speaking", new { examId, id = newId });
             }
 
         }
@@ -238,7 +238,7 @@ namespace PTE.Controllers
             }
             else
             {
-                return RedirectToAction("ReadAloud", "Speaking", new { examId, id = newId });
+                return RedirectToAction("DescribeImage", "Speaking", new { examId, id = newId });
             }
 
         }
@@ -310,7 +310,78 @@ namespace PTE.Controllers
             }
             else
             {
-                return RedirectToAction("ReadAloud", "Speaking", new { examId, id = newId });
+                return RedirectToAction("RetellLecture", "Speaking", new { examId, id = newId });
+            }
+
+        }
+
+        // GET: /<controller>/
+        ///////////// Repeat Sentence /////////////////////
+        [Route("exam/{examId}/answer_short_question/{id}")]
+        public IActionResult AnswerShortQuestion(long examId, long id)
+        {
+            var answerShortQuestion = _db.AnswerShortQuestions.FirstOrDefault(e => e.ExamId == examId && e.AnswerShortQuestionId == id);
+
+            return View(answerShortQuestion);
+        }
+
+        [Route("exam/{examId}/answer_short_question/answer/{answerShortQuestionId}")]
+        public IActionResult AnswerAnswerShortQuestion(long examId, long answerShortQuestionId)
+        {
+            var answerPath = "./answers/" + examId + "/speaking/answer_short_question/" + answerShortQuestionId + ".wav";
+            var temp = new AnswerShortQuestionAnswer()
+            {
+                ExamId = examId,
+                User = "Miraj",
+                AnswerShortQuestionId = answerShortQuestionId,
+                AnswerShortQuestionPath = answerPath
+            };
+
+            if (!_db.AnswerShortQuestionAnswers.Any(answer => answer.ExamId == examId && answer.AnswerShortQuestionId == answerShortQuestionId))
+            {
+                _db.Add(temp);
+                _db.SaveChanges();
+
+            }
+
+
+            var newId = 0;
+            switch (answerShortQuestionId)
+            {
+                case 1:
+                    newId = 2;
+                    break;
+
+                case 2:
+                    //set the id for repeat sentence
+                    newId = 1;
+                    break;
+                    //case 2:
+                    //    newId = 3;
+                    //    break;
+                    //case 3:
+                    //    newId = 4;
+                    //    break;
+
+            }
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                if (answerShortQuestionId != 2)
+                {
+                    return Json(new { url = Url.Action("AnswerShortQuestion", "Speaking", new { examId, id = newId }) });
+                }
+                else
+                {
+                    return Json(new { url = Url.Action("SummarizeWrittenText", "Writing", new { examId, id = newId }) });
+                }
+
+
+
+
+            }
+            else
+            {
+                return RedirectToAction("AnswerShortQuestion", "Speaking", new { examId, id = newId });
             }
 
         }
@@ -344,7 +415,7 @@ namespace PTE.Controllers
                 case "retell_lecture":
                     return RedirectToAction("AnswerRetellLecture", "Speaking", new { examId, retellLectureId=itemId });
                 case "answer_short_question":
-                    return RedirectToAction("AnswerAnswerShortQuestion", "Speaking", new { examId, itemId });
+                    return RedirectToAction("AnswerAnswerShortQuestion", "Speaking", new { examId, answerShortQuestionId=itemId });
 
             }
             return RedirectToAction("AnswerReadAloud", "Speaking",new { examId, itemId });

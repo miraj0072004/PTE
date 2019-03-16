@@ -45,7 +45,6 @@
 
   <ItemGroup>
     <Folder Include="Answers\" />
-    <Folder Include="Questions\1\Speaking\" />
   </ItemGroup>
 
 </Project>

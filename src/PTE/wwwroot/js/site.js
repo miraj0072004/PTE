@@ -18,7 +18,7 @@
         var AudioContext = window.AudioContext || window.webkitAudioContext; // shim for AudioContext when it's not avb. 
         var audioContext = new AudioContext; //new audio context to help us record
         var speechEvents;
-        $("#readaloud_next").prop("disabled", true).css('opacity', 0.5); //having the next button disabled at startup
+        $(".next-button").prop("disabled", true).css('opacity', 0.5); //having the next button disabled at startup
 
         //variables needed for identifying silence
         var speechStopped = true;
@@ -39,6 +39,7 @@
                 break;
             case "repeat_sentence":
                 answerDuration = 15;
+                questionDuration += 3;
                 break;
             case "describe_image":
                 answerDuration = 40;
@@ -48,6 +49,7 @@
                 break;
             case "answer_short_question":
                 answerDuration = 10;
+                questionDuration += 3;
                 break;
 
         }
@@ -57,8 +59,8 @@
         }
 
         mid = answerDuration;
-        
-        if (typeId == "repeat_sentence" || typeId == "retell_lecture") {
+
+        if (typeId == "repeat_sentence" || typeId == "retell_lecture" || typeId =="answer_short_question") {
             var countdown_question = setInterval(function () {
                 $("#countdown_question").text("Status : Beginning in " + questionInterval + " seconds");
                 if (questionInterval == 0) {
@@ -120,7 +122,7 @@
                     interval--;
 
                     if (interval < mid) {
-                        $("#readaloud_next").prop("disabled", false).css('opacity', 1); //enable the next button
+                        $(".next-button").prop("disabled", false).css('opacity', 1); //enable the next button
                         $("#countdown_answer").text("Recording");
 
 
@@ -267,7 +269,14 @@
         }
 
         //when next button is clicked
-        $("#readaloud_next,#repeat_s_next,#describe_image_next").click
+        //$("#readaloud_next,#repeat_s_next,#describe_image_next,#retell_l_next,#answer_short_q_next").click
+        //    (function () {
+        //        stopRecording();
+        //        speechEvents.stop();
+        //    }
+        //);
+
+        $(".next-button").click
             (function () {
                 stopRecording();
                 speechEvents.stop();

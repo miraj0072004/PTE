@@ -1,15 +1,15 @@
-﻿@model PTE.Models.Speaking.RepeatSentence
+﻿@model PTE.Models.Speaking.AnswerShortQuestion
 
 @{
-    ViewBag.Title = "Repeat Sentence";
+    ViewBag.Title = "Answer Short Question";
     Layout = "_Layout_Exam";
-    
+
 }
 
 @section scripts
     {
     <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
-    <script src="~/js/repeatsentence.js"></script>
+    <script src="~/js/answershortquestion.js"></script>
     <script src="~/js/hark.js"></script>
 
     <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
@@ -20,19 +20,19 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
     <link rel="stylesheet" href="~/css/pips.css" />
 }
-<input type="hidden" id="typeId" name="typeId" value="repeat_sentence">
+<input type="hidden" id="typeId" name="typeId" value="answer_short_question">
 <input type="hidden" id="questionDuration" name="questionDuration" value=@Model.QuestionDuration>
 <div class="panel panel-default" id="repeat_sentence">
-    <div class="panel-heading"><h3>Speaking - Repeat Sentence</h3></div>
+    <div class="panel-heading"><h3>Speaking - Answer Short Question</h3></div>
 
     <div class="panel-body">
         <div class="row">
-            <audio id="myAudio" >
+            <audio id="myAudio">
                 @{
-                    var audioSource =  "/Questions/" + Model.ExamId + "/Speaking/repeat_sentence/" + Model.RepeatSentenceId+".mp3";
+                    var audioSource = "/Questions/" + Model.ExamId + "/Speaking/answer_short_question/" + Model.AnswerShortQuestionId + ".mp3";
                     //var audioSource = "/" + Model.RepeatSentenceId + ".mp3";
                 }
-                <source src=@audioSource  type="audio/mp3">
+                <source src=@audioSource type="audio/mp3">
                 @*<source src= type="audio/mp3">*@
 
                 Your browser does not support the audio element.
@@ -93,7 +93,7 @@
 
 
         @*<a href="@Url.Action("AnswerReadAloud", "Speaking", new {examId = Model.ExamId, readAloudId = Model.ReadAloudId })" class="btn btn-info pull-right" role="button">Next</a>*@
-        <a id="repeat_s_next" class="btn btn-info pull-right next-button" role="button">Next</a>
+        <a id="answer_short_q_next" class="btn btn-info pull-right next-button" role="button">Next</a>
 
     </div>
 </div>

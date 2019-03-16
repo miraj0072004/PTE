@@ -8,9 +8,10 @@ using PTE.Models;
 namespace PTE.Migrations
 {
     [DbContext(typeof(ExamDataContext))]
-    partial class ExamDataContextModelSnapshot : ModelSnapshot
+    [Migration("20190316135130_AddingAnswerShortQuestion")]
+    partial class AddingAnswerShortQuestion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.3")
