@@ -33,6 +33,8 @@
 
         var questionInterval = 3;
 
+       
+
         switch (typeId) {
             case "read_aloud":
                 answerDuration = questionDuration;
@@ -60,6 +62,8 @@
 
         mid = answerDuration;
 
+        //start main code block upon page load
+
         if (typeId == "repeat_sentence" || typeId == "retell_lecture" || typeId =="answer_short_question") {
             var countdown_question = setInterval(function () {
                 $("#countdown_question").text("Status : Beginning in " + questionInterval + " seconds");
@@ -86,6 +90,7 @@
                     if (playPromise !== null) {
                         playPromise.catch(() => { audio.play(); })
                     }
+                    
                     answerCountDown();
                     clearInterval(countdown_question); // jump out of setInterval()
                 }
@@ -114,6 +119,11 @@
         else {
             answerCountDown();
         }
+
+        //finish main code block upon page load
+
+        
+
 
         function answerCountDown() {
             var countdown_answer = setInterval(
